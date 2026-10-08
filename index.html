@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BioQuiz – związki biologiczne</title>
+  <meta name="description" content="Quiz do nauki związków biologicznych: aminokwasy, nukleotydy, cukry, koenzymy, metabolity.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="naglowek">
+    <h1>🧬 BioQuiz</h1>
+    <nav>
+      <button class="zakladka aktywna" data-ekran="start">Quiz</button>
+      <button class="zakladka" data-ekran="baza">Baza związków</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Ekran startowy: konfiguracja quizu -->
+    <section id="ekran-start" class="ekran">
+      <p class="wstep">Wybierz klasy związków i rodzaje pytań, a potem sprawdź swoją wiedzę.</p>
+
+      <fieldset>
+        <legend>Klasy związków <button type="button" class="link" data-zaznacz="kategorie">wszystkie / żadne</button></legend>
+        <div id="lista-kategorii" class="siatka-wyboru"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Rodzaje pytań <button type="button" class="link" data-zaznacz="typy">wszystkie / żadne</button></legend>
+        <div id="lista-typow" class="siatka-wyboru"></div>
+      </fieldset>
+
+      <fieldset class="wiersz">
+        <legend>Ustawienia</legend>
+        <label>Liczba pytań
+          <select id="liczba-pytan">
+            <option>10</option>
+            <option selected>20</option>
+            <option>30</option>
+            <option>50</option>
+          </select>
+        </label>
+        <label class="opcja"><input type="checkbox" id="tryb-bledow"> <span>Tylko związki, z którymi mam problem (<span id="liczba-bledow">0</span>)</span></label>
+      </fieldset>
+
+      <p id="komunikat-start" class="komunikat" role="alert" hidden></p>
+      <button id="przycisk-start" class="glowny">Rozpocznij quiz</button>
+    </section>
+
+    <!-- Ekran pytania -->
+    <section id="ekran-quiz" class="ekran" hidden>
+      <div class="pasek-postepu"><div id="postep"></div></div>
+      <p class="licznik"><span id="numer-pytania"></span> · wynik: <span id="wynik-biezacy"></span></p>
+
+      <h2 id="tresc-pytania"></h2>
+      <figure id="obrazek-wrap" hidden>
+        <img id="obrazek-pytania" alt="Struktura chemiczna związku">
+        <figcaption id="obrazek-blad" hidden>Nie udało się wczytać struktury z PubChem (brak internetu?). To pytanie zostanie pominięte.</figcaption>
+      </figure>
+
+      <div id="odpowiedzi" class="odpowiedzi"></div>
+
+      <div id="wyjasnienie" class="karta" hidden></div>
+      <div class="akcje">
+        <button id="przycisk-zakoncz" class="drugorzedny">Zakończ</button>
+        <button id="przycisk-dalej" class="glowny" hidden>Dalej →</button>
+      </div>
+      <p class="podpowiedz">Skróty: klawisze 1–4 wybierają odpowiedź, Enter – dalej.</p>
+    </section>
+
+    <!-- Ekran wyników -->
+    <section id="ekran-wynik" class="ekran" hidden>
+      <h2>Wynik</h2>
+      <p id="podsumowanie" class="podsumowanie"></p>
+      <div id="lista-bledow"></div>
+      <div class="akcje">
+        <button id="przycisk-powtorz" class="drugorzedny">Powtórz błędne</button>
+        <button id="przycisk-nowy" class="glowny">Nowy quiz</button>
+      </div>
+    </section>
+
+    <!-- Przeglądarka bazy -->
+    <section id="ekran-baza" class="ekran" hidden>
+      <div class="wiersz">
+        <input id="szukaj" type="search" placeholder="Szukaj: nazwa, wzór, skrót, opis…" aria-label="Szukaj w bazie">
+        <select id="filtr-kategorii" aria-label="Filtruj według klasy"><option value="">Wszystkie klasy</option></select>
+      </div>
+      <p id="licznik-bazy" class="licznik"></p>
+      <div id="lista-zwiazkow" class="siatka-kart"></div>
+    </section>
+  </main>
+
+  <footer>
+    Dane: <code>data/compounds.json</code> · struktury: <a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubChem</a>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
