@@ -1,0 +1,13 @@
+{
+  "name": "bioquiz",
+  "version": "1.0.0",
+  "description": "Quiz do nauki związków biologicznych dla studentów bioinformatyki",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
